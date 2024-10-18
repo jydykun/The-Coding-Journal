@@ -1,0 +1,37 @@
+<header class="{% if current_user.is_authenticated %}mt-[30px]{% endif %} bg-slate-900 text-slate-200 overflow-auto">
+    <nav class="container max-w-screen-xl mx-auto px-8">
+        <div class="md:flex md:justify-between">
+            <div class="flex justify-between content-center py-7">
+
+                <!--Logo Container-->
+                <a class="inline-block" href="{{ url_for('main.index') }}">
+                    <p class="font-extrabold">{{ app_name }}</p>
+                </a>
+
+                <!--Menu Burger Icon-->
+                <button class="place-self-center md:hidden" id="menu-burger-icon">
+                    <span class="bg-slate-200"></span>
+                    <span class="bg-slate-200"></span>
+                    <span class="bg-slate-200"></span>
+                </button>
+
+            </div>
+
+            <!--Collapsible Menu-->
+            <ul class="mb-5 hidden md:flex md:mb-0 md:items-center" id="collapse">
+            {% if categories %}
+                {% for category in categories %}
+                <li class="{% if loop.last %}pb-2{% endif %} md:pb-0"><a class="navbar-link" href="{{ url_for('main.category_page', category_key=category.key) }}">{{category.name}}</a></li>
+                {% endfor %}
+            {% else %}
+                {% if current_user.is_authenticated %}
+                <a class="navbar-link" href="{{ url_for('main.profile', username=current_user.username)}}">Add Category</a>
+                {% else %}
+                <a class="navbar-link" href="{{ url_for('auth.login')}}">Login</a>
+                {% endif %}
+            {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+</header>

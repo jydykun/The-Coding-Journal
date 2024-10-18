@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {# LEAVE THIS BLANK #}
+{% endblock %}
+
+{% block body %}
+
+  <div class="flex flex-col justify-center items-center w-full h-screen primary">
+    <a class="block my-5 font-extrabold text-2xl text-white" href="{{ url_for('main.index')}}">{{ app_name }}</a>
+    <div class="w-full bg-white md:rounded-md md:w-96 md:shadow-md md:shadow-indigo-900">
+      <div class="flex flex-col p-10">
+        <p class="mb-3 text-center text-2xl font-bold">SIGN UP</p>
+        <form action="{{ url_for('auth.signup') }}" method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            {{ form.username(class="w-full my-4 p-2 ring-1 ring-slate-400 rounded-md", placeholder="Username") }}
+            <span class="block text-xs -mt-1 text-red-900">{{ form.username.errors[0] }}</span>
+
+            {{ form.password(class="w-full my-4 p-2 ring-1 ring-slate-400 rounded-md", placeholder="Password") }}
+            <span class="block text-xs -mt-1 text-red-900">{{ form.password.errors[0] }}</span>
+
+            {{ form.confirm_password(class="w-full my-4 p-2 ring-1 ring-slate-400 rounded-md", placeholder="Confirm Password") }}
+            <span class="block text-xs -mt-1 text-red-900">{{ form.confirm_password.errors[0] }}</span>
+
+            {{ form.email(class="w-full my-4 p-2 ring-1 ring-slate-400 rounded-md", placeholder="Email") }}
+            <span class="block text-xs -mt-1 text-red-900">{{ form.email.errors[0] }}</span>
+
+            <span class="inline-block mt-3">{{ form.recaptcha }}</span>
+            <span class="block text-xs text-red-900">{{ form.recaptcha.errors[0] }}</span>
+
+            <button class="w-full mt-3 p-2 bg-slate-900 rounded-md draftly-button" type="submit">Submit</button>
+
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+  {# LEAVE THIS BLANK #}
+{% endblock %}
